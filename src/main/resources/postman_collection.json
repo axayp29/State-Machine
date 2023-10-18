@@ -1,0 +1,1278 @@
+{
+	"info": {
+		"_postman_id": "71aa0524-205b-4348-972d-95fed4770f84",
+		"name": "StateMachine based Workflow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "WorkflowType",
+			"item": [
+				{
+					"name": "GetWorkflowTypeByTypeId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/wf/type/2/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wf",
+								"type",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWorkflowTypes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/wf/type/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wf",
+								"type",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateLeaveWorkflowType",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyId\": 1,\n    \"branchId\": 1,    \n    \"workflowTypeId\": 1,\n    \"withEffectFromDate\": \"13-04-2023 15:55:52\",\n    \"wfPropDto\": {\n        \"hasParallelApproval\": false,\n        \"hasRepeatableApprovers\": false,\n        \"canRollBackApproval\": true,\n        \"canAdminApproveWorkflow\": true,\n        \"adminRoleIds\": [\n            0\n        ],\n        \"maximumChangeRequestThreshold\": 3,\n        \"maximumRollbackApprovalThreshold\": 3\n    },\n    \"createDate\": \"13-04-2023 15:55:52\",\n    \"createdByUserId\": 1,\n    \"isActive\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/wf/type/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wf",
+								"type",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteWorkflowTypeByTypeId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/wf/type/1/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wf",
+								"type",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateLoanWorkflowType",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyId\": 1,\n    \"branchId\": 1,\n    \"workflowTypeId\": 2,\n    \"withEffectFromDate\": \"13-04-2023 18:40:00\",    \n    \"wfPropDto\": {\n        \"hasParallelApproval\": false,\n        \"hasRepeatableApprovers\": false,\n        \"canRollBackApproval\": true,\n        \"canAdminApproveWorkflow\": true,\n        \"adminRoleIds\": [\n            0\n        ],\n        \"maximumChangeRequestThreshold\": 3,\n        \"maximumRollbackApprovalThreshold\": 3\n    },\n    \"createDate\": \"10-03-2023 13:27:52\",\n    \"createdByUserId\": 1,\n    \"isActive\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/wf/type/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wf",
+								"type",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WorkflowInstance",
+			"item": [
+				{
+					"name": "LeaveApp",
+					"item": [
+						{
+							"name": "Send Events",
+							"item": [
+								{
+									"name": "0. LeaveApp WF Send Reset Workflow Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstance\": 14,\n    \"event\": \"E_RESET\",\n    \"actionBy\": 1\n}"
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/reset",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"reset"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "1. LeaveApp WF Send Initialize Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstance\": 14,\n    \"event\": \"E_INITIALIZE\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "1.5. LeaveApp WF Send Cancel Event at Created State",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstance\":2,\n    \"event\": \"E_CANCEL\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "2. LeaveApp WF Send Submit Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstance\": 72,\n    \"event\": \"E_SUBMIT\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3. LeaveApp WF Send Trigger Review Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstance\": 7,\n    \"event\": \"E_TRIGGER_REVIEW_OF\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3.5. LeaveApp WF Send Cancel Event at Under Process State",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstance\":7,\n    \"event\": \"E_CANCEL\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3.5. LeaveApp WF Send Request Changes Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstance\": 17,\n    \"event\": \"E_REQUEST_CHANGES_IN\",\n    \"actionBy\": 234,\n    \"orderNo\": 1,\n    \"comment\": \"kai locha che\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "4. LeaveApp WF Send Forward (1st reviewer) Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstanceId\": 1,\n    \"event\": \"E_FORWARD\",\n    \"actionBy\": 5,\n    \"orderNo\": 1,\n    \"comment\": \"please review reviewer 2\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "5. LeaveApp WF Send Forward (2nd reviewer) Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstanceId\": 1,\n    \"event\": \"E_FORWARD\",\n    \"actionBy\": 6,\n    \"orderNo\": 2,\n    \"comment\": \"please review reviewer 3\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "5.5 LeaveApp WF Send Roll Back Approval Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstance\": 17,\n    \"event\": \"E_ROLL_BACK\",\n    \"actionBy\": 123,\n    \"orderNo\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "6. LeaveApp WF Send Forward (3rd reviewer) Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstanceId\": 1,\n    \"event\": \"E_FORWARD\",\n    \"actionBy\": 7,\n    \"orderNo\": 3,\n    \"comment\": \"done\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "7. LeaveApp WF Send Trigger Complete Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LEAVE_APPLICATION\",\n    \"workflowInstance\": 7,\n    \"event\": \"E_TRIGGER_COMPLETE\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "CRUD",
+							"item": [
+								{
+									"name": "Create LeaveApplication Workflow",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"companyId\": 1,\n    \"branchId\": 1,\n    \"typeId\": \"LEAVE_APPLICATION\",\n    \"workflowVersion\": 1,\n    \"leaveType\": 1,\n    \"reviewers\": [\n        {\n            \"first\": 1,\n            \"second\": 5\n        },\n        {\n            \"first\": 2,\n            \"second\": 6\n        },\n        {\n            \"first\": 3,\n            \"second\": 7\n        }\n    ],  \n    \"createdByUserId\": 1,\n    \"createDate\": \"13-04-2023 15:53:12\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetLeaveApplicationWorkflowById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/wf/leave/72/",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"72",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetAllLeaveApplicationWorkflows",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/wf/leave/",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete LeaveApplicationWorkflowById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/wf/leave/72/",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"72",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "GetWorkflowInstanceById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/wf/id/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wf",
+										"id",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetWorkflowInstanceByCompanyIdAndBranchId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/wf/cid/1/bid/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wf",
+										"cid",
+										"1",
+										"bid",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetWorkflowInstanceByTypeId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/wf/cid/1/bid/1/type/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wf",
+										"cid",
+										"1",
+										"bid",
+										"1",
+										"type",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "LoanApp",
+					"item": [
+						{
+							"name": "CRUD",
+							"item": [
+								{
+									"name": "Create LoanApplication Workflow",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"companyId\": 1,\n    \"branchId\": 1,        \n    \"typeId\": \"LOAN_APPLICATION\",\n    \"workflowVersion\": 1,\n    \"loanType\": 2,\n    \"reviewers\": [\n        {\n            \"first\": 1,\n            \"second\": 234\n        },\n        {\n            \"first\": 2,\n            \"second\": 123\n        },\n        {\n            \"first\": 3,\n            \"second\": 235\n        }\n    ],\n    \"createdByUserId\": 1,\n    \"createDate\": \"02-03-2023 18:53:12\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetLoanApplicationWorkflowById",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/wf/loan/78/",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"78",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetAllLoanApplicationWorkflows",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/wf/loan/",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete LoanApplicationWorkflowById",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/wf/loan/2/",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"2",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Send Events",
+							"item": [
+								{
+									"name": "0. LoanApp WF Send Reset Workflow Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\": 14,\n    \"event\": \"E_RESET\",\n    \"actionBy\": 1\n}"
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/reset",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"reset"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "1. LoanApp WF Send Initialize Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\": 14,\n    \"event\": \"E_INITIALIZE\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "1.5. LoanApp WF Send Cancel Event at Created State",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\":2,\n    \"event\": \"E_CANCEL\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "2. LoanApp WF Send Submit Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\": 72,\n    \"event\": \"E_SUBMIT\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3. LoanApp WF Send Trigger Review Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\": 7,\n    \"event\": \"E_TRIGGER_REVIEW_OF\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3.5. LoanApp WF Send Cancel Event at Under Process State",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\":7,\n    \"event\": \"E_CANCEL\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/leave/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"leave",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3.5. LeaveApp WF Send Request Changes Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\": 17,\n    \"event\": \"E_REQUEST_CHANGES_IN\",\n    \"actionBy\": 234,\n    \"orderNo\": 1,\n    \"comment\": \"kai locha che\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "4. LoanApp WF Send Forward (1st reviewer) Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstanceId\": 6,\n    \"event\": \"E_FORWARD\",\n    \"actionBy\": 234,\n    \"orderNo\": 1,\n    \"comment\": \"please review reviewer 2\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "5. LoanApp WF Send Forward (2nd reviewer) Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\": 72,\n    \"event\": \"E_FORWARD\",\n    \"actionBy\": 123,\n    \"orderNo\": 2,\n    \"comment\": \"please review reviewer 3\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "5.5 LoanApp WF Send Roll Back Approval Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\": 17,\n    \"event\": \"E_ROLL_BACK\",\n    \"actionBy\": 123,\n    \"orderNo\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "6. LoanApp WF Send Forward (3rd reviewer) Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\": 72,\n    \"event\": \"E_FORWARD\",\n    \"actionBy\": 235,\n    \"orderNo\": 3,\n    \"comment\": \"done\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"event"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "7. LoanApp WF Send Trigger Complete Event",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"workflowType\": \"LOAN_APPLICATION\",\n    \"workflowInstance\": 7,\n    \"event\": \"E_TRIGGER_COMPLETE\",\n    \"actionBy\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/wf/loan/event",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"wf",
+												"loan",
+												"event"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "WorkflowEventLog",
+			"item": [
+				{
+					"name": "GetWorkflowEventLogsByType&UserId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyId\": 1,\n    \"branchId\": 1,\n    \"typeId\": 2,\n    \"actionBy\": 1 \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wf/log/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wf",
+								"log",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWorkflowEventLogsByType&InstanceId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyId\": 1,\n    \"branchId\": 1,\n    \"typeId\": 2,\n    \"instanceId\": 6 \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wf/log/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wf",
+								"log",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWorkflowEventLogsByDateGreaterThan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyId\": 1,\n    \"branchId\": 1,    \n    \"actionDate\": \"10-03-2023 00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wf/log/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wf",
+								"log",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWorkflowEventLogsByType",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyId\": 1,\n    \"branchId\": 1,\n    \"typeId\": 2 \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wf/log/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wf",
+								"log",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWorkflowEventLogsByState&Event",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyId\": 1,\n    \"branchId\": 1,\n    \"state\": \"S_CLOSED\",\n    \"event\": \"E_FORWARD\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wf/log/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wf",
+								"log",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
